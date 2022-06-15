@@ -112,7 +112,7 @@ def main():
 
     while(True):
         while (not encoderQueue.empty()):
-            encoder_state += encoderQueue.get()
+            encoder_state = encoderQueue.get()
         if (encoder_state > 1):
             print("encoder increased")
             inputStatusDict['value'] = InputStatusEnum.ENCODER_INCREASE
