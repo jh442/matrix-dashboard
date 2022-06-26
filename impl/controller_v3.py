@@ -47,8 +47,8 @@ def main():
     encoderQueue = queue.Queue()
     encoder = RotaryEncoder(enc_A, enc_B)
     encoder.when_rotated_clockwise = lambda enc: rotate_clockwise(enc, encoderQueue)
-    encoder.when_rotated_counter_clockwise = lambda enc: rotate_counter_clockwise(
-        enc, encoderQueue
+    encoder.when_rotated_counter_clockwise = lambda x: rotate_counter_clockwise(
+        x, encoderQueue
     )
     encoder_state = 0
 
