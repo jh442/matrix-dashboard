@@ -169,6 +169,11 @@ def main():
 
         # matrix.brightness = 100
         matrix.SetImage(frame)
+
+        # test to see if the background will scoll without the button
+        time.sleep(15)
+        switch_next_app()
+
         time.sleep(0.05)
 
 
