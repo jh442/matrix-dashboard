@@ -30,12 +30,9 @@ def main():
     displayOn = True
     print("starting the application")
     config = configparser.ConfigParser()
-    # parsed_configs = config.read("../config.ini")
-    os.getcwd()
-    ini_path = os.path.join(__file__, "config.ini")
-    parsed_configs = config.read(ini_path)
+    parsed_configs = config.read("../config.ini")
     if len(parsed_configs) == 0:
-        print("no config file found: " + ini_path)
+        print("no config file found")
         sys.exit()
 
     canvas_width = config.getint("System", "canvas_width", fallback=64)
