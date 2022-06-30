@@ -32,7 +32,7 @@ def main():
     config = configparser.ConfigParser()
     # parsed_configs = config.read("../config.ini")
     os.getcwd()
-    ini_path = os.path.join(os.chdir(".."), "config.ini")
+    ini_path = os.path.join(os.getcwd(), "config.ini")
     parsed_configs = config.read(ini_path)
     if len(parsed_configs) == 0:
         print("no config file found: " + ini_path)
