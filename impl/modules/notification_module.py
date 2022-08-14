@@ -77,7 +77,6 @@ def on_message(_, message, noti_queue, app_white_list):
         contents = message["push"]
         try:
             if contents["type"] == "sms_changed" and len(contents["notifications"]) > 0:
-                print("SMS received!")
                 data = contents["notifications"][0]
                 noti_queue.put(
                     Notification(
@@ -93,7 +92,6 @@ def on_message(_, message, noti_queue, app_white_list):
                 print("Package attempt: " + contents["package_name"])
                 if contents["package_name"] in app_white_list.keys():
                     if contents["type"] == "mirror":
-                        print("Mirror received!")
                         noti_queue.put(
                             Notification(
                                 app_white_list[contents["package_name"]],
@@ -105,8 +103,6 @@ def on_message(_, message, noti_queue, app_white_list):
                             )
                         )
                     elif contents["type"] == "dismissal":
-                        print("Dismissal received!")
-                        print(message)
                         noti_queue.put(
                             Notification(
                                 app_white_list[contents["package_name"]],
@@ -117,7 +113,6 @@ def on_message(_, message, noti_queue, app_white_list):
                                 time.time(),
                             )
                         )
-            print("Push processed completed")
         except KeyError:
             print("error trying to check white list")
             pass

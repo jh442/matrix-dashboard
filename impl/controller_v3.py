@@ -181,7 +181,6 @@ def encButtonFunc(enc_button, inputStatusDict):
         time_diff = time.time() - start_time
 
     if time_diff >= hold_time:
-        print("long press detected")
         inputStatusDict["value"] = InputStatusEnum.LONG_PRESS
     else:
         enc_button.when_pressed = None
@@ -194,39 +193,33 @@ def encButtonFunc(enc_button, inputStatusDict):
                 while time.time() - new_start_time <= 0.3:
                     time.sleep(0.1)
                     if enc_button.is_pressed:
-                        print("triple press detected")
                         inputStatusDict["value"] = InputStatusEnum.TRIPLE_PRESS
                         enc_button.when_pressed = lambda button: encButtonFunc(
                             button, inputStatusDict
                         )
                         return
-                print("double press detected")
                 inputStatusDict["value"] = InputStatusEnum.DOUBLE_PRESS
                 enc_button.when_pressed = lambda button: encButtonFunc(
                     button, inputStatusDict
                 )
                 return
-        print("single press detected")
         inputStatusDict["value"] = InputStatusEnum.SINGLE_PRESS
         enc_button.when_pressed = lambda button: encButtonFunc(button, inputStatusDict)
         return
 
 
 def rotate_clockwise(encoder, encoderQueue):
-    print("rotate_clockwise detected")
     encoderQueue.put(1)
     encoder.value = 0
 
 
 def rotate_counter_clockwise(encoder, encoderQueue):
-    print("rotate_counter_clockwise detected")
     encoderQueue.put(-1)
     encoder.value = 0
 
 
 def tilt_callback(tilt_switch, isHorizontalDict):
     startTime = time.time()
-    print("tilt_callback detected")
     while time.time() - startTime < 0.25:
         pass
     isHorizontalDict["value"] = tilt_switch.is_pressed
