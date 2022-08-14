@@ -12,12 +12,12 @@ from apps_v2 import (
     notion_v2,
     subcount,
     gif_viewer,
-    weather,
+    #  weather,
     life,
     spotify_player,
     garmin_screen,
 )
-from modules import weather_module, notification_module, spotify_module, garmin_module
+from modules import notification_module, spotify_module, garmin_module
 
 sw = 13
 enc_A = 5
@@ -89,7 +89,7 @@ def main():
     }
 
     modules = {
-        "weather": weather_module.WeatherModule(config),
+        # "weather": weather_module.WeatherModule(config),
         "notifications": notification_module.NotificationModule(config),
         "spotify": spotify_module.SpotifyModule(config),
         "garmin": garmin_module.GarminModule(config),
@@ -98,7 +98,7 @@ def main():
     app_list = [
         main_screen.MainScreen(config, modules, callbacks),
         #    notion_v2.NotionScreen(config, modules, callbacks),
-        weather.WeatherScreen(config, modules, callbacks),
+        # weather.WeatherScreen(config, modules, callbacks),
         #    subcount.SubcountScreen(config, modules, callbacks),
         #    life.GameOfLifeScreen(config, modules, callbacks),
         spotify_player.SpotifyScreen(config, modules, callbacks),
