@@ -89,7 +89,7 @@ def on_message(_, message, noti_queue, app_white_list):
                     )
                 )
             else:
-                print("Package attempt: " + contents["package_name"])
+                # print("Package attempt: " + contents["package_name"])
                 if contents["package_name"] in app_white_list.keys():
                     if contents["type"] == "mirror":
                         noti_queue.put(

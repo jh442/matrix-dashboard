@@ -9,11 +9,11 @@ import select
 
 from apps_v2 import (
     main_screen,
-    notion_v2,
-    subcount,
+    #   notion_v2,
+    #    subcount,
     gif_viewer,
     weather,
-    life,
+    # life,
     spotify_player,
     garmin_screen,
 )
