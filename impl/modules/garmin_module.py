@@ -38,7 +38,7 @@ class GarminModule:
                 ),
             )
             self.thread.start()
-
+            print("Garmin Log in successful")
         except Exception as e:
             print("[Garmin Module] error trying to authenticate", e)
             self.invalid = True
