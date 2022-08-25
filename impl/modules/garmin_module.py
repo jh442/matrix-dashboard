@@ -40,7 +40,7 @@ class GarminModule:
             self.thread.start()
 
         except Exception as e:
-            #        print("[Garmin Module] error trying to authenticate", e)
+            print("[Garmin Module] error trying to authenticate", e)
             self.invalid = True
 
     def getLastActivity(self):
