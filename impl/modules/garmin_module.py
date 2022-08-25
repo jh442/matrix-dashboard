@@ -47,6 +47,7 @@ class GarminModule:
         if not self.activity_queue.empty():
             self.last_activity = self.activity_queue.get()
             self.activity_queue.queue.clear()
+        print("lastActivity", self.last_activity)
         return (
             self.last_activity["distance"],
             self.last_activity["duration"],
