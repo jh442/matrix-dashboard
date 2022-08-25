@@ -91,7 +91,7 @@ def main():
     modules = {
         "weather": weather_module.WeatherModule(config),
         "notifications": notification_module.NotificationModule(config),
-        "spotify": spotify_module.SpotifyModule(config),
+        # "spotify": spotify_module.SpotifyModule(config),
         "garmin": garmin_module.GarminModule(config),
     }
     # Removing some of the modules to get the intial set up tested
@@ -101,7 +101,7 @@ def main():
         weather.WeatherScreen(config, modules, callbacks),
         #    subcount.SubcountScreen(config, modules, callbacks),
         #    life.GameOfLifeScreen(config, modules, callbacks),
-        spotify_player.SpotifyScreen(config, modules, callbacks),
+        # spotify_player.SpotifyScreen(config, modules, callbacks),
         garmin_screen.GarminScreen(config, modules, callbacks),
         gif_viewer.GifScreen(config, modules, callbacks),
     ]
