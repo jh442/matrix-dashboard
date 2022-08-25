@@ -80,8 +80,6 @@ class GarminScreen:
 
     def lastActivity(self):
 
-        garmin_module = self.modules["garmin"]
-
         frame = Image.new("RGB", (self.canvas_width, self.canvas_height), (0, 0, 0))
         # png background, but not really liking it
         # frame.paste(self.bgs["road"], (0, 0))
