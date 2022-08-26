@@ -8,7 +8,7 @@ class SpotifyModule:
         self.invalid = False
 
         if (
-            config is not None
+            config != None
             and "Spotify" in config
             and "client_id" in config["Spotify"]
             and "client_secret" in config["Spotify"]
@@ -24,11 +24,7 @@ class SpotifyModule:
                 client_id, client_secret, redirect_uri, scope=SCOPE, cache_path=CACHE
             )
 
-            if (
-                client_id is not ""
-                and client_secret is not ""
-                and redirect_uri is not ""
-            ):
+            if client_id != "" and client_secret != "" and redirect_uri != "":
                 try:
                     access_token = ""
                     token_info = sp_oauth.get_cached_token()
@@ -64,9 +60,9 @@ class SpotifyModule:
                     # print("Authenticated for spotipy", self.auth_manager)
                     # print(self.auth_manager.get_authorize_url())
 
-                    # self.sp = spotipy.Spotify(
-                    #     auth_manager=self.auth_manager, requests_timeout=10
-                    # )
+                    self.sp = spotipy.Spotify(
+                        auth_manager=self.auth_manager, requests_timeout=10
+                    )
 
                     self.isPlaying = False
                 except Exception as e:
