@@ -36,6 +36,7 @@ class SpotifyModule:
                         print("Found cached token!")
                         access_token = token_info["access_token"]
                     else:
+                        print("No cache token, trying to get one: ", access_token)
                         url = self.auth_manager.get_authorize_url()
                         code = self.auth_manager.parse_response_code(url)
                         if code != url:
