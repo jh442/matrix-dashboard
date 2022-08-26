@@ -1,5 +1,6 @@
 import spotipy
 import os
+from spotipy import oauth2
 
 
 class SpotifyModule:
@@ -17,24 +18,52 @@ class SpotifyModule:
             client_id = config["Spotify"]["client_id"]
             client_secret = config["Spotify"]["client_secret"]
             redirect_uri = config["Spotify"]["redirect_uri"]
+            CACHE = ".spotipyoauthcache"
+            SCOPE = "user-read-currently-playing, user-read-playback-state, user-modify-playback-state"
+            sp_oauth = oauth2.SpotifyOAuth(
+                client_id, client_secret, redirect_uri, scope=SCOPE, cache_path=CACHE
+            )
+
             if (
                 client_id is not ""
                 and client_secret is not ""
                 and redirect_uri is not ""
             ):
                 try:
-                    os.environ["SPOTIPY_CLIENT_ID"] = client_id
-                    os.environ["SPOTIPY_CLIENT_SECRET"] = client_secret
-                    os.environ["SPOTIPY_REDIRECT_URI"] = redirect_uri
+                    access_token = ""
+                    token_info = sp_oauth.get_cached_token()
+                    if token_info:
+                        print("Found cached token!")
+                        access_token = token_info["access_token"]
+                    else:
+                        url = request.url
+                        code = sp_oauth.parse_response_code(url)
+                        if code != url:
+                            print(
+                                "Found Spotify auth code in Request URL! Trying to get valid access token..."
+                            )
+                            token_info = sp_oauth.get_access_token(code)
+                            access_token = token_info["access_token"]
 
-                    scope = "user-read-currently-playing, user-read-playback-state, user-modify-playback-state"
-                    self.auth_manager = spotipy.SpotifyOAuth(scope=scope)
-                    print("Authenticated for spotipy", self.auth_manager)
-                    print(self.auth_manager.get_authorize_url())
+                    if access_token:
+                        print(
+                            "Access token available! Trying to get user information..."
+                        )
+                        self.sp = spotipy.Spotify(access_token)
 
-                    self.sp = spotipy.Spotify(
-                        auth_manager=self.auth_manager, requests_timeout=10
-                    )
+                    # os.environ["SPOTIPY_CLIENT_ID"] = client_id
+                    # os.environ["SPOTIPY_CLIENT_SECRET"] = client_secret
+                    # os.environ["SPOTIPY_REDIRECT_URI"] = redirect_uri
+
+                    # scope = "user-read-currently-playing, user-read-playback-state, user-modify-playback-state"
+                    # self.auth_manager = spotipy.SpotifyOAuth(scope=scope)
+                    # print("Authenticated for spotipy", self.auth_manager)
+                    # print(self.auth_manager.get_authorize_url())
+
+                    # self.sp = spotipy.Spotify(
+                    #     auth_manager=self.auth_manager, requests_timeout=10
+                    # )
+
                     self.isPlaying = False
                 except Exception as e:
                     print("[Spotify Module] error trying to authenticate", e)
