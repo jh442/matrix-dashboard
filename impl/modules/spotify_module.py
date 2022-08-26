@@ -32,6 +32,9 @@ class SpotifyModule:
                 try:
                     access_token = ""
                     token_info = sp_oauth.get_cached_token()
+                    os.environ["SPOTIPY_CLIENT_ID"] = client_id
+                    os.environ["SPOTIPY_CLIENT_SECRET"] = client_secret
+                    os.environ["SPOTIPY_REDIRECT_URI"] = redirect_uri
                     self.auth_manager = spotipy.SpotifyOAuth(scope=SCOPE)
                     if token_info:
                         print("Found cached token!")
