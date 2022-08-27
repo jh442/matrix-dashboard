@@ -37,17 +37,14 @@ class SpotifyModule:
                         redirect_uri,
                         scope=SCOPE,
                         cache_path=CACHE,
-                        open_browser=False,
                     )
                     token = self.auth_manager.get_access_token()
                     print("token: ", token)
                     print(self.auth_manager.get_authorize_url())
-                    print(
-                        "code",
-                        self.auth_manager.parse_response_code(
-                            self.auth_manager.get_authorize_url()
-                        ),
+                    code = self.auth_manager.parse_response_code(
+                        self.auth_manager.get_authorize_url()
                     )
+                    print("code", code)
                     self.sp = spotipy.Spotify(
                         auth_manager=self.auth_manager, requests_timeout=10
                     )
