@@ -29,7 +29,11 @@ class SpotifyModule:
 
                     scope = "user-read-currently-playing, user-read-playback-state, user-modify-playback-state"
                     self.auth_manager = spotipy.SpotifyOAuth(
-                        scope=scope, open_browser=False
+                        client_id,
+                        client_secret,
+                        redirect_uri,
+                        scope,
+                        open_browser=False,
                     )
                     print(self.auth_manager.get_authorize_url())
                     self.sp = spotipy.Spotify(
