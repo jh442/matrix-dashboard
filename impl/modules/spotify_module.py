@@ -32,10 +32,11 @@ class SpotifyModule:
                     scope = "user-read-currently-playing, user-read-playback-state, user-modify-playback-state"
 
                     self.auth_manager = spotipy.SpotifyOAuth(
+                        "Joffroi",
+                        scope,
                         client_id,
                         client_secret,
                         redirect_uri,
-                        scope=SCOPE,
                         open_browser=False,
                     )
                     token = self.auth_manager.get_access_token()
@@ -46,7 +47,7 @@ class SpotifyModule:
                     )
                     print("code", code)
                     self.sp = spotipy.Spotify(
-                        auth_manager=self.auth_manager, requests_timeout=10
+                        auth=self.auth_manager, requests_timeout=10
                     )
                     self.isPlaying = False
                 except Exception as e:
