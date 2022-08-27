@@ -35,7 +35,7 @@ class SpotifyModule:
                         scope,
                         open_browser=False,
                     )
-                    print(self.auth_manager.get_authorize_url())
+
                     self.sp = spotipy.Spotify(
                         auth_manager=self.auth_manager, requests_timeout=10
                     )
