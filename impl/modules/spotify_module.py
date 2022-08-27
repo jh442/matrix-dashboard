@@ -26,27 +26,14 @@ class SpotifyModule:
                     os.environ["SPOTIPY_CLIENT_ID"] = client_id
                     os.environ["SPOTIPY_CLIENT_SECRET"] = client_secret
                     os.environ["SPOTIPY_REDIRECT_URI"] = redirect_uri
-                    CACHE = ".spotipyoauthcache"
-                    SCOPE = "user-read-currently-playing, user-read-playback-state, user-modify-playback-state"
 
                     scope = "user-read-currently-playing, user-read-playback-state, user-modify-playback-state"
-
                     self.auth_manager = spotipy.SpotifyOAuth(
-                        client_id,
-                        client_secret,
-                        redirect_uri,
-                        scope,
-                        open_browser=False,
+                        scope=scope, open_browser=False
                     )
-                    token = self.auth_manager.get_access_token()
-                    print("token: ", token)
                     print(self.auth_manager.get_authorize_url())
-                    code = self.auth_manager.parse_response_code(
-                        self.auth_manager.get_authorize_url()
-                    )
-                    print("code", code)
                     self.sp = spotipy.Spotify(
-                        auth=self.auth_manager, requests_timeout=10
+                        auth_manager=self.auth_manager, requests_timeout=10
                     )
                     self.isPlaying = False
                 except Exception as e:
