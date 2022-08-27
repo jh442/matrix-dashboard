@@ -68,6 +68,8 @@ class SpotifyScreen:
                 spotify_module.decrease_volume()
 
         response = spotify_module.getCurrentPlayback()
+        print("spotify response", response)
+
         if response is not None:
             (
                 artist,
