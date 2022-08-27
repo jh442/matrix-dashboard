@@ -27,7 +27,7 @@ class SpotifyModule:
                     os.environ["SPOTIPY_CLIENT_SECRET"] = client_secret
                     os.environ["SPOTIPY_REDIRECT_URI"] = redirect_uri
 
-                    scope = "user-read-currently-playing, user-read-playback-state, user-modify-playback-state"
+                    scope = "user-read-currently-playing,user-read-playback-state,user-modify-playback-state"
                     self.auth_manager = spotipy.SpotifyOAuth(scope=scope)
 
                     self.sp = spotipy.Spotify(
