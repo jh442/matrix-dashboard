@@ -26,18 +26,29 @@ class SpotifyModule:
                     os.environ["SPOTIPY_CLIENT_ID"] = client_id
                     os.environ["SPOTIPY_CLIENT_SECRET"] = client_secret
                     os.environ["SPOTIPY_REDIRECT_URI"] = redirect_uri
+                    CACHE = ".spotipyoauthcache"
+                    SCOPE = "user-read-currently-playing, user-read-playback-state, user-modify-playback-state"
 
                     scope = "user-read-currently-playing, user-read-playback-state, user-modify-playback-state"
-                    self.auth_manager = spotipy.SpotifyOAuth(scope=scope)
-                    print("Authenticated for spotipy", self.auth_manager)
-                    print(self.auth_manager.get_authorize_url())
+                    token = self.auth_manager.get_access_token()
+                    print("token: ", token)
 
+                    self.auth_manager = spotipy.SpotifyOAuth(
+                        client_id,
+                        client_secret,
+                        redirect_uri,
+                        scope=SCOPE,
+                        cache_path=CACHE,
+                        open_browser=False,
+                    )
+
+                    print(self.auth_manager.get_authorize_url())
                     self.sp = spotipy.Spotify(
                         auth_manager=self.auth_manager, requests_timeout=10
                     )
                     self.isPlaying = False
                 except Exception as e:
-                    print("[Spotify Module] error trying to authenticate", e)
+                    print(e)
                     self.invalid = True
             else:
                 print("[Spotify Module] Empty Spotify client id or secret")
@@ -76,10 +87,8 @@ class SpotifyModule:
                     track["item"]["duration_ms"],
                 )
             else:
-                print("[Spotify Module] Nothing in get user track")
                 return None
         except Exception as e:
-            print("[Spotify Module] Exception caught in current_user_playing_track")
             print(e)
             return None
 
