@@ -1,6 +1,7 @@
 import spotipy
 import os
 from spotipy import oauth2
+import spotipy.util as util
 
 
 class SpotifyModule:
@@ -59,10 +60,14 @@ class SpotifyModule:
                     scope = "user-read-currently-playing, user-read-playback-state, user-modify-playback-state"
                     self.auth_manager = spotipy.SpotifyOAuth(scope=scope)
                     print("Authenticated for spotipy", self.auth_manager)
-                    print(self.auth_manager.get_authorize_url())
-                    self.auth_manager.parse_response_code(
-                        self.auth_manager.get_authorize_url()
+                    util.prompt_for_user_token(
+                        "Joffroi",
+                        SCOPE,
+                        client_id=client_id,
+                        client_secret=client_secret,
+                        redirect_uri=redirect_uri,
                     )
+
                     print(
                         "access token",
                         self.auth_manager.get_access_token(
