@@ -32,7 +32,6 @@ class SpotifyModule:
                     scope = "user-read-currently-playing, user-read-playback-state, user-modify-playback-state"
 
                     self.auth_manager = spotipy.SpotifyOAuth(
-                        "Joffroi",
                         scope,
                         client_id,
                         client_secret,
